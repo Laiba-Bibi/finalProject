@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-white py-12">
+    <footer className="bg-primary text-white py-6 md:py-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
           <div>
             <div className="flex items-center mb-4">
               <svg
@@ -53,28 +53,31 @@ const Footer = () => {
               <li><a href="#" className="hover:underline">Media Kit</a></li>
             </ul>
           </div>
+          <div className="flex justify-between items-center">
+            <h4 className="font-bold mb-4">Try It Today</h4>
+            <button className="bg-secondary hover:bg-yellow-300 text-black px-6 py-2 rounded flex items-center">
+              Start Today
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4 ml-2"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
         </div>
 
-        <div className="border-t border-gray-700 pt-8">
+        <div className="border-t border-gray-700 pt-6">
           <div className="flex flex-col md:flex-row md:justify-between md:items-start">
-            <div className="w-full md:w-1/2 mb-8 md:mb-0">
-              <h3 className="font-bold text-xl mb-4">Try It Today</h3>
+            <div className="w-full md:w-1/2 mb-6 md:mb-0">
+              <h3 className="font-bold text-xl mb-4">Get Started Today</h3>
               <p className="text-sm mb-4">Get started for free. Add your whole team as your needs grow.</p>
-              <button className="bg-secondary hover:bg-yellow-300 text-black px-6 py-2 rounded flex items-center">
-                Start Today
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 ml-2"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
             </div>
             <div className="w-full md:w-1/2 flex flex-col items-center md:items-end">
               <div className="flex space-x-4 mb-4">

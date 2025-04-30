@@ -32,12 +32,12 @@ const FAQ = () => {
 
   return (
     <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/2 mb-10 md:mb-0">
-            <div className="flex items-center mb-8">
-              <img src="/assets/spiral-icon.png" alt="Spiral icon" className="w-12 h-12 mr-4" />
-              <h2 className="text-3xl md:text-4xl font-bold text-primary">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="flex flex-col md:flex-row gap-8 items-stretch">
+          {/* FAQ Section */}
+          <div className="md:w-1/2 flex flex-col h-full">
+            <div className="mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary leading-tight">
                 Frequently
                 <br />
                 Asked
@@ -45,9 +45,13 @@ const FAQ = () => {
                 Questions
               </h2>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4 flex-1">
               {faqs.map((faq, index) => (
-                <div key={index} className="border rounded-lg p-4 cursor-pointer" onClick={() => toggleFAQ(index)}>
+                <div
+                  key={index}
+                  className="border rounded-lg p-4 cursor-pointer"
+                  onClick={() => toggleFAQ(index)}
+                >
                   <div className="flex justify-between items-center">
                     <h3 className="font-semibold">{faq.question}</h3>
                     <svg
@@ -60,27 +64,33 @@ const FAQ = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <line x1="12" y1="5" x2="12" y2="19"></line>
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
                   </div>
-                  {openIndex === index && <p className="mt-2 text-gray-600">{faq.question}</p>}
+                  {openIndex === index && (
+                    <p className="mt-2 text-gray-600">{faq.answer}</p>
+                  )}
                 </div>
               ))}
             </div>
           </div>
-          <div className="md:w-1/2 md:pl-12">
-            <div className="border rounded-lg p-8">
-              <div className="flex items-center mb-6">
-                <div className="w-10 h-10 bg-primary mr-4"></div>
-                <h3 className="font-bold">Do you have more questions?</h3>
+
+          {/* Question Card Section */}
+          <div className="md:w-1/2 flex">
+            <div className="border rounded-lg p-8 flex flex-col justify-between w-full h-full">
+              <div className="flex flex-col items-center text-center mb-8">
+                <div className="w-10 h-10 bg-primary mb-4"></div>
+                <h3 className="font-bold text-lg">Do you have more questions?</h3>
+                <p className="text-gray-600 mt-4">
+                  Contact us for personalized support and answers to all your questions.
+                </p>
               </div>
-              <p className="text-gray-600 mb-8">
-                Contact us for personalized support and answers to all your questions.
-              </p>
-              <button className="w-full bg-secondary hover:bg-yellow-300 text-black py-4 rounded">
-                Shoot a Direct Mail
-              </button>
+              <div className="flex justify-center">
+                <button className="bg-[#4F9CF9] hover:bg-blue-500 text-white py-3 px-6 rounded w-48">
+                  Shoot a Direct Mail
+                </button>
+              </div>
             </div>
           </div>
         </div>

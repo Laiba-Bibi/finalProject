@@ -1,4 +1,7 @@
 import React from 'react';
+import img1 from '../assets/testimonial-1.jpg';
+import img2 from '../assets/testimonial-2.jpg';
+import img3 from '../assets/testimonial-3.jpg';
 
 const Testimonials = () => {
   const testimonials = [
@@ -6,7 +9,7 @@ const Testimonials = () => {
       id: 1,
       name: "Jessie Owner",
       position: "Founder, XYZ Company",
-      image: "/assets/testimonial-1.jpg",
+      image: img1,
       quote:
         "TechQuest Mentor transformed my career path with personalized guidance and expert support.",
       rating: 5,
@@ -15,7 +18,7 @@ const Testimonials = () => {
       id: 2,
       name: "Alex Carter",
       position: "Tech Lead, ABC Corp",
-      image: "/assets/testimonial-2.jpg",
+      image: img2,
       quote:
         "The skill assessments and roadmaps were game-changers for my professional growth.",
       rating: 5,
@@ -24,7 +27,7 @@ const Testimonials = () => {
       id: 3,
       name: "Sara Lee",
       position: "Developer, DEF Inc",
-      image: "/assets/testimonial-3.jpg",
+      image: img3,
       quote:
         "Joining the TechQuest community opened doors to new opportunities and connections.",
       rating: 5,
@@ -49,14 +52,14 @@ const Testimonials = () => {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="bg-[#22479b] p-6 rounded-lg shadow-md flex flex-col items-center text-center h-full"
+              className="bg-[#22479b] p-6 rounded-lg shadow-md flex flex-col items-center text-center h-full transition-all duration-300 hover:bg-white"
             >
               <img
                 src={testimonial.image}
                 alt={testimonial.name}
-                className="w-20 h-20 rounded-full mb-4 border-4 border-white"
+                className="w-24 h-24 object-cover object-center rounded-full mb-4 border-4 border-white"
               />
-              <p className="text-white italic mb-4 flex-grow">
+              <p className="text-white italic mb-4 flex-grow hover:text-black transition-colors duration-300">
                 "{testimonial.quote}"
               </p>
               <p className="font-bold text-white text-lg mb-2">

@@ -1,0 +1,61 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# OS-specific files
+AppData/
+Local/
+Cookies/
+Recent/
+My Documents/
+Start Menu/
+
+# IDE/Editor folders
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.swp
+
+# Build directories
+/dist/
+/build/
+
+# Tailwind config (if needed)
+tailwind.config.js
+postcss.config.js
+
+# Other generated files (adjust as needed)
+*.bak
+*.swp
+*.lock
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
