@@ -31,7 +31,7 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-8 text-[#22479b]">
             <Link to="/" className="hover:text-black">Home</Link>
             <Link to="/about" className="hover:text-black">About</Link>
-            <Link to="/#contact" className="hover:text-black">Contact</Link>
+            <Link to="/contact" className="hover:text-black">Contact</Link>
           </div>
 
           {/* Desktop Buttons */}
@@ -57,7 +57,7 @@ const Navbar = () => {
           <div className="md:hidden bg-white px-4 pb-4 space-y-4 shadow-lg">
             <Link to="/" onClick={toggleMenu} className="block text-[#22479b] hover:text-black">Home</Link>
             <Link to="/about" onClick={toggleMenu} className="block text-[#22479b] hover:text-black">About</Link>
-            <Link to="/#contact" onClick={toggleMenu} className="block text-[#22479b] hover:text-black">Contact</Link>
+            <Link to="/contact" onClick={toggleMenu} className="block text-[#22479b] hover:text-black">Contact</Link>
             <div className="flex flex-col space-y-2 pt-2">
               <Link to="/register" onClick={toggleMenu} className="bg-[#4F9CF9] hover:bg-[#3b8be0] text-white px-6 py-2 rounded text-center">
                 Signup

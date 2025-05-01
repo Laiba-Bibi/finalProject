@@ -11,6 +11,7 @@ import ExpertReview from './pages/ExpertReview';
 import Gamification from './pages/Gamification';
 import Profile from './pages/Profile';
 import About from './pages/About';
+import Contact from './pages/Contact';
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
         <Route path="/expert-review" element={<ExpertReview />} />
         <Route path="/gamification" element={<Gamification />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/contact" element={<Contact />} />
+
       </Routes>
     </Router>
   );

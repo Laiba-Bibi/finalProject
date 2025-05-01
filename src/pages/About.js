@@ -4,6 +4,9 @@ import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import banner from '../assets/Banner.png'; // Ensure the image path is correct
 import Image from '../assets/team.jpg'; // Placeholder for CTA section image
+import member1 from '../assets/member1.jpeg';
+import member2 from '../assets/member2.png';
+
 
 
 const About = () => {
@@ -45,8 +48,9 @@ const About = () => {
             {/* Team Member 1 */}
             <div className="bg-white p-6 rounded-lg shadow-lg text-center">
               <img
-                src="https://via.placeholder.com/150"
-                alt="Laiba Bibi "
+                 src={member1}
+                 alt="Laiba Bibi"
+                 className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
                 className="w-32 h-32 rounded-full mx-auto mb-4"
               />
               <h3 className="text-xl font-semibold text-gray-800">Laiba Bibi </h3>
@@ -58,8 +62,9 @@ const About = () => {
             {/* Team Member 2 */}
             <div className="bg-white p-6 rounded-lg shadow-lg text-center">
               <img
-                src="https://via.placeholder.com/150"
+                src={member2}
                 alt="Noor Fatima"
+                className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
                 className="w-32 h-32 rounded-full mx-auto mb-4"
               />
               <h3 className="text-xl font-semibold text-gray-800">Noor Fatima</h3>
@@ -98,9 +103,9 @@ const About = () => {
 
       {/* Redesigned Call to Action Section with Image */}
       <section className="bg-gray-50 py-20">
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center">
+        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
           {/* Left Section with Image */}
-          <div className="w-full">
+          <div className="w-full h-full flex justify-center">
             <img
               src={Image} // Replace this with your desired image
               alt="Join TechQuest Mentor"

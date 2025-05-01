@@ -1,7 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // ✅ Import this
 import AboutImage from '../assets/Aboutus.png';
 
 const AboutUs = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigate
+
+  const handleViewMore = () => {
+    navigate('/about'); // This should match the route path in your router
+  };
+
   return (
     <section className="py-16 bg-white" id="about">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -23,12 +30,14 @@ const AboutUs = () => {
             <p className="text-[#22479b] mb-4">
               TechQuest Mentor is a dedicated platform that connects aspiring tech professionals
               with experienced industry experts who guide them through each career step.
-              Together, they work to build rewarding, future-ready careers in the tech world.
             </p>
             <p className="text-[#22479b] mb-8">
               Our platform offers personalized roadmaps, skill assessments, and community support to help you succeed.
             </p>
-            <button className="bg-gradient-to-r from-[#3b8be0] to-[#22479b] hover:bg-gradient-to-l text-white px-6 py-3 rounded transition duration-300">
+            <button
+              onClick={handleViewMore}
+              className="bg-gradient-to-r from-[#3b8be0] to-[#22479b] hover:bg-gradient-to-l text-white px-6 py-3 rounded transition duration-300"
+            >
               View More
             </button>
           </div>
