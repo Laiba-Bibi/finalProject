@@ -40,8 +40,6 @@ Start Menu/
 /dist/
 /build/
 
-# Tailwind config (if needed)
-postcss.config.js
 
 # Other generated files (adjust as needed)
 *.bak
