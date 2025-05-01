@@ -10,6 +10,8 @@ import Roadmap from './pages/Roadmap';
 import ExpertReview from './pages/ExpertReview';
 import Gamification from './pages/Gamification';
 import Profile from './pages/Profile';
+import About from './pages/About';
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/about" element={<About />} />
         <Route path="/goals" element={<GoalSelection />} />
         <Route path="/assessment" element={<SkillAssessment />} />
         <Route path="/roadmap" element={<Roadmap />} />

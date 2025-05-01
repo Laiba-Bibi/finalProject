@@ -41,7 +41,6 @@ Start Menu/
 /build/
 
 # Tailwind config (if needed)
-tailwind.config.js
 postcss.config.js
 
 # Other generated files (adjust as needed)
