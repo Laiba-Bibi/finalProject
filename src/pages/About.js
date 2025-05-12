@@ -3,11 +3,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import banner from '../assets/Banner.png'; // Ensure the image path is correct
-import Image from '../assets/team.jpg'; // Placeholder for CTA section image
 import member1 from '../assets/member1.jpeg';
 import member2 from '../assets/member2.png';
-
-
 
 const About = () => {
   return (
@@ -40,20 +37,29 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
+      {/* Vision Section */}
       <section className="bg-gray-100 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Vision</h2>
+          <p className="text-lg text-gray-600 max-w-4xl mx-auto text-center">
+            We envision a world where every aspiring tech professional has access to personalized guidance and resources to achieve their full potential. TechQuest Mentor strives to bridge the gap between ambition and success by fostering a community of continuous learning and expert support.
+          </p>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Meet Our Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Team Member 1 */}
             <div className="bg-white p-6 rounded-lg shadow-lg text-center">
               <img
-                 src={member1}
-                 alt="Laiba Bibi"
-                 className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
-                className="w-32 h-32 rounded-full mx-auto mb-4"
+                src={member1}
+                alt="Laiba Bibi"
+                className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
               />
-              <h3 className="text-xl font-semibold text-gray-800">Laiba Bibi </h3>
+              <h3 className="text-xl font-semibold text-gray-800">Laiba Bibi</h3>
               <p className="text-gray-600">Developer & Co-Creator</p>
               <p className="text-gray-500 mt-2">
                 Laiba is a passionate computer science student dedicated to building user-centric solutions for career growth.
@@ -65,7 +71,6 @@ const About = () => {
                 src={member2}
                 alt="Noor Fatima"
                 className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
-                className="w-32 h-32 rounded-full mx-auto mb-4"
               />
               <h3 className="text-xl font-semibold text-gray-800">Noor Fatima</h3>
               <p className="text-gray-600">Developer & Co-Creator</p>
@@ -78,11 +83,11 @@ const About = () => {
       </section>
 
       {/* Experts Section */}
-      <section className="py-16">
+      <section className="bg-gray-100 py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Expert Mentors</h2>
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Experts</h2>
           <p className="text-lg text-gray-600 max-w-4xl mx-auto text-center mb-8">
-            TechQuest Mentor connects users with industry experts who provide personalized feedback and validate progress. Experts can log in to their dedicated dashboards to review user profiles, offer guidance, and help shape the next generation of tech professionals.
+            Our team of industry experts at TechQuest Mentor is dedicated to empowering users by reviewing profiles, providing personalized feedback, and guiding career development. Log in to our expert dashboard to assess user progress and offer tailored advice to shape the future of tech professionals.
           </p>
           <div className="flex justify-center space-x-4">
             <Link
@@ -95,43 +100,8 @@ const About = () => {
               to="/expert-signup"
               className="bg-transparent border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition duration-300"
             >
-              Become an Expert
+              Join as an Expert
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Redesigned Call to Action Section with Image */}
-      <section className="bg-gray-50 py-20">
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-          {/* Left Section with Image */}
-          <div className="w-full h-full flex justify-center">
-            <img
-              src={Image} // Replace this with your desired image
-              alt="Join TechQuest Mentor"
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </div>
-          {/* Right Section with CTA */}
-          <div className="w-full text-center md:text-left">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Ready to Start Your Tech Journey?</h2>
-            <p className="text-lg text-gray-700 mb-6">
-              Whether you're a student looking for guidance or an expert eager to mentor the next generation of tech leaders, we welcome you to join TechQuest Mentor. Empower your career or give back to the community today!
-            </p>
-            <div className="flex justify-center md:justify-start space-x-6">
-              <Link
-                to="/signup"
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
-              >
-                Get Started
-              </Link>
-              <Link
-                to="/expert-signup"
-                className="bg-transparent border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition duration-300"
-              >
-                Become a Mentor
-              </Link>
-            </div>
           </div>
         </div>
       </section>

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Link } from 'react-router-dom';
 import banner from '../assets/Banner.png'; // Reusing the banner from About.js
-import team from '../assets/team.jpg'; // Placeholder for contact section image
 
 const Contact = () => {
   // State for form inputs
@@ -42,7 +40,7 @@ const Contact = () => {
         <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-white text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
           <p className="text-lg md:text-xl max-w-3xl">
-            Have questions or need assistance? Reach out to the TechQuest Mentor team, and let's start your tech journey together!
+            Have questions or need assistance? Reach out to the TechQuest Mentor team, and let's shape your tech career together!
           </p>
         </div>
       </section>
@@ -52,7 +50,7 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Get in Touch</h2>
           <p className="text-lg text-gray-600 max-w-4xl mx-auto text-center mb-8">
-            Whether you're a student seeking career guidance or an expert interested in mentoring, we're here to help. Fill out the form below, and our team will respond promptly.
+            Whether you're a student seeking career guidance or an expert interested in providing feedback, we're here to help. Fill out the form below, and our team will respond promptly.
           </p>
           <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
             <div className="space-y-6">
@@ -114,36 +112,27 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="bg-gray-100 py-20">
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-          {/* Left Section with Image */}
-          <div className="w-full h-full flex justify-center">
-            <img
-              src={team}
-              alt="Join TechQuest Mentor"
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </div>
-          {/* Right Section with CTA */}
-          <div className="w-full text-center md:text-left">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Ready to Shape Your Tech Future?</h2>
-            <p className="text-lg text-gray-700 mb-6">
-              Join TechQuest Mentor to access personalized career roadmaps, skill assessments, and expert feedback. Whether you're starting your journey or mentoring others, we're here to support you.
-            </p>
-            <div className="flex justify-center md:justify-start space-x-6">
-              <Link
-                to="/signup"
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
-              >
-                Get Started
-              </Link>
-              <Link
-                to="/expert-signup"
-                className="bg-transparent border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition duration-300"
-              >
-                Become a Mentor
-              </Link>
+      {/* Contact Information Section */}
+      <section className="bg-gray-100 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Contact Details</h2>
+          <p className="text-lg text-gray-600 max-w-4xl mx-auto text-center mb-8">
+            Reach out to us directly for immediate assistance or inquiries about joining our platform as an expert or user.
+          </p>
+          <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg text-center">
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800">Email</h3>
+                <p className="text-gray-600">support@techquestmentor.com</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800">Phone</h3>
+                <p className="text-gray-600">+1 (800) 123-4567</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800">Address</h3>
+                <p className="text-gray-600">123 Tech Lane, Innovation City, TX 75001</p>
+              </div>
             </div>
           </div>
         </div>
