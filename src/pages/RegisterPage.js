@@ -8,11 +8,33 @@ import React, { useState } from 'react';
        const [email, setEmail] = useState('');
        const [password, setPassword] = useState('');
 
-       const handleSubmit = (e) => {
-         e.preventDefault();
-         // Placeholder for form submission
-         console.log('Register:', { name, email, password });
-       };
+       const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/register/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+body: JSON.stringify({ username: name, email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert('Registration successful! Please login.');
+      // Redirect to login page or clear form
+      // For example: navigate('/login');
+    } else {
+      // Show error message from backend
+      alert(data.error || 'Registration failed. Try again.');
+    }
+  } catch (error) {
+    alert('Something went wrong. Please try again later.');
+  }
+};
+
 
        return (
          <div className="bg-gray-100 min-h-screen flex flex-col">

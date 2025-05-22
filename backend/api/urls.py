@@ -1,6 +1,9 @@
 from django.urls import path
-from .views import test_api
+from rest_framework_simplejwt.views import TokenRefreshView
+from .views import register, EmailTokenObtainPairView  # Import from api.views
 
 urlpatterns = [
-    path('test/', test_api),  # http://localhost:8000/api/test/
+    path('register/', register, name='register'),
+    path('token/', EmailTokenObtainPairView.as_view(), name='token_obtain_pair'),  # Use custom view
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
