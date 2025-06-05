@@ -10,6 +10,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import EmailTokenObtainPairSerializer
 from django.contrib.auth import get_user_model
 from .models import UserInterest, UserProfile
+from rest_framework.views import APIView
 from .serializers import UserInterestSerializer, UserProfileSerializer
 
 User = get_user_model()
@@ -70,3 +71,12 @@ def save_user_info(request):
         UserProfile.objects.update_or_create(user=request.user, defaults=serializer.validated_data)
         return Response({'message': 'User information saved successfully.'}, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    from rest_framework.views import APIView
+from .models import SubSkill
+from .serializers import SubSkillSerializer
+
+class SkillMatrixAPIView(APIView):
+    def get(self, request, field_name):
+        skills = SubSkill.objects.filter(category__field__name__iexact=field_name)
+        serializer = SubSkillSerializer(skills, many=True)
+        return Response(serializer.data)

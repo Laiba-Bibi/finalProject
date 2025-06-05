@@ -48,3 +48,12 @@ class UserProfileSerializer(serializers.ModelSerializer):
                 return False
 
         raise serializers.ValidationError("interested_in_learning must be 'Yes' or 'No' or boolean.")
+from .models import TechField, SkillCategory, SubSkill
+
+class SubSkillSerializer(serializers.ModelSerializer):
+    category = serializers.CharField(source='category.name')
+    field = serializers.CharField(source='category.field.name')
+
+    class Meta:
+        model = SubSkill
+        fields = ['id', 'name', 'importance', 'category', 'field']
