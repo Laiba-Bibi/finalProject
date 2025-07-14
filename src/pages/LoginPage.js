@@ -7,11 +7,32 @@ import React, { useState } from 'react';
        const [email, setEmail] = useState('');
        const [password, setPassword] = useState('');
 
-       const handleSubmit = (e) => {
-         e.preventDefault();
-         // Placeholder for form submission
-         console.log('Login:', { email, password });
-       };
+       const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/token/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+body: JSON.stringify({ username: email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert('Login successful!');
+      localStorage.setItem('access_token', data.access);
+      localStorage.setItem('refresh_token', data.refresh);
+      // You can redirect the user or update UI here
+    } else {
+      alert('Invalid credentials. Please try again.');
+    }
+  } catch (error) {
+    alert('Something went wrong. Please try again later.');
+  }
+};
+
 
        return (
          <div className="bg-gray-100 min-h-screen flex flex-col">
