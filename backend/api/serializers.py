@@ -2,14 +2,14 @@
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from .models import UserInterest, UserProfile
-
+User = get_user_model()
 
 class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
-        email = attrs.get("username")
+        email = attrs.get("username")  # username = email in this override
         password = attrs.get("password")
 
         try:
@@ -22,13 +22,14 @@ class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
         if not user:
             raise serializers.ValidationError('Invalid credentials.')
 
-        attrs['username'] = user.username
+        attrs['username'] = user.username  # Pass to parent
         data = super().validate(attrs)
         return data
 class UserInterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInterest
         fields = ['interest']
+
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:

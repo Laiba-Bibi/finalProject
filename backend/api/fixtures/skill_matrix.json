@@ -1,0 +1,1067 @@
+[
+  {
+    "model": "api.techfield",
+    "pk": 1,
+    "fields": {
+      "name": "Web Development"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 1,
+    "fields": {
+      "field": 1,
+      "name": "Front-End Development"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 2,
+    "fields": {
+      "field": 1,
+      "name": "Back-End Development"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 3,
+    "fields": {
+      "field": 1,
+      "name": "Database Management"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 4,
+    "fields": {
+      "field": 1,
+      "name": "Version Control"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 5,
+    "fields": {
+      "field": 1,
+      "name": "UI/UX Design"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 6,
+    "fields": {
+      "field": 1,
+      "name": "Responsive Design"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 7,
+    "fields": {
+      "field": 1,
+      "name": "Web Performance Optimization"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 8,
+    "fields": {
+      "field": 1,
+      "name": "DevOps Practices"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 9,
+    "fields": {
+      "field": 1,
+      "name": "Cloud Services"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 10,
+    "fields": {
+      "field": 1,
+      "name": "Cybersecurity"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 11,
+    "fields": {
+      "field": 1,
+      "name": "Soft Skills"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "name": "HTML",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "name": "CSS",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "name": "JavaScript",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 4,
+    "fields": {
+      "category": 1,
+      "name": "React",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 5,
+    "fields": {
+      "category": 1,
+      "name": "Angular",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 6,
+    "fields": {
+      "category": 2,
+      "name": "Node.js",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 7,
+    "fields": {
+      "category": 2,
+      "name": "PHP",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 8,
+    "fields": {
+      "category": 2,
+      "name": "Python",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 9,
+    "fields": {
+      "category": 2,
+      "name": "Ruby on Rails",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 10,
+    "fields": {
+      "category": 3,
+      "name": "SQL",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 11,
+    "fields": {
+      "category": 3,
+      "name": "NoSQL",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 12,
+    "fields": {
+      "category": 3,
+      "name": "Firebase",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 13,
+    "fields": {
+      "category": 4,
+      "name": "Git",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 14,
+    "fields": {
+      "category": 4,
+      "name": "GitHub",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 15,
+    "fields": {
+      "category": 5,
+      "name": "Figma",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 16,
+    "fields": {
+      "category": 5,
+      "name": "Sketch",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 17,
+    "fields": {
+      "category": 5,
+      "name": "Adobe XD",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 18,
+    "fields": {
+      "category": 6,
+      "name": "Bootstrap",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 19,
+    "fields": {
+      "category": 6,
+      "name": "CSS Flexbox",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 20,
+    "fields": {
+      "category": 6,
+      "name": "Media Queries",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 21,
+    "fields": {
+      "category": 7,
+      "name": "Lighthouse",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 22,
+    "fields": {
+      "category": 7,
+      "name": "PageSpeed Insights",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 23,
+    "fields": {
+      "category": 8,
+      "name": "CI/CD (Jenkins)",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 24,
+    "fields": {
+      "category": 8,
+      "name": "GitLab CI",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 25,
+    "fields": {
+      "category": 8,
+      "name": "Docker",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 26,
+    "fields": {
+      "category": 9,
+      "name": "AWS",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 27,
+    "fields": {
+      "category": 9,
+      "name": "Azure",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 28,
+    "fields": {
+      "category": 9,
+      "name": "Google Cloud",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 29,
+    "fields": {
+      "category": 10,
+      "name": "Secure Coding Practices",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 30,
+    "fields": {
+      "category": 10,
+      "name": "OWASP Guidelines",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 31,
+    "fields": {
+      "category": 11,
+      "name": "Communication",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 32,
+    "fields": {
+      "category": 11,
+      "name": "Problem-Solving",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.techfield",
+    "pk": 2,
+    "fields": {
+      "name": "Artificial Intelligence"
+    }
+  },
+  {
+    "model": "api.techfield",
+    "pk": 3,
+    "fields": {
+      "name": "Machine Learning"
+    }
+  },
+  {
+    "model": "api.techfield",
+    "pk": 4,
+    "fields": {
+      "name": "Data Science"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 2,
+    "fields": {
+      "field": 2,
+      "name": "Programming Languages"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 3,
+    "fields": {
+      "field": 2,
+      "name": "Machine Learning Algorithms"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 4,
+    "fields": {
+      "field": 2,
+      "name": "Data Manipulation"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 5,
+    "fields": {
+      "field": 2,
+      "name": "Statistical Analysis"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 6,
+    "fields": {
+      "field": 2,
+      "name": "Natural Language Processing (NLP)"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 7,
+    "fields": {
+      "field": 2,
+      "name": "Model Evaluation"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 8,
+    "fields": {
+      "field": 2,
+      "name": "Ethics in AI"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 9,
+    "fields": {
+      "field": 2,
+      "name": "Soft Skills"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 10,
+    "fields": {
+      "field": 3,
+      "name": "Programming Languages"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 11,
+    "fields": {
+      "field": 3,
+      "name": "Machine Learning Frameworks"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 12,
+    "fields": {
+      "field": 3,
+      "name": "Feature Engineering"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 13,
+    "fields": {
+      "field": 3,
+      "name": "Model Deployment"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 14,
+    "fields": {
+      "field": 3,
+      "name": "Hyperparameter Tuning"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 15,
+    "fields": {
+      "field": 3,
+      "name": "Model Evaluation Metrics"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 16,
+    "fields": {
+      "field": 3,
+      "name": "Collaboration Tools"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 17,
+    "fields": {
+      "field": 3,
+      "name": "Soft Skills"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 18,
+    "fields": {
+      "field": 4,
+      "name": "Programming Languages"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 19,
+    "fields": {
+      "field": 4,
+      "name": "Statistical Analysis"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 20,
+    "fields": {
+      "field": 4,
+      "name": "Data Manipulation Tools"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 21,
+    "fields": {
+      "field": 4,
+      "name": "Machine Learning Techniques"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 22,
+    "fields": {
+      "field": 4,
+      "name": "Data Visualization Tools"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 23,
+    "fields": {
+      "field": 4,
+      "name": "Big Data Technologies"
+    }
+  },
+  {
+    "model": "api.skillcategory",
+    "pk": 24,
+    "fields": {
+      "field": 4,
+      "name": "Soft Skills"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 3,
+    "fields": {
+      "category": 2,
+      "name": "Python",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 4,
+    "fields": {
+      "category": 2,
+      "name": "R",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 5,
+    "fields": {
+      "category": 2,
+      "name": "Java",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 6,
+    "fields": {
+      "category": 3,
+      "name": "Decision Trees",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 7,
+    "fields": {
+      "category": 3,
+      "name": "Neural Networks",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 8,
+    "fields": {
+      "category": 3,
+      "name": "Support Vector Machines",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 9,
+    "fields": {
+      "category": 4,
+      "name": "Pandas",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 10,
+    "fields": {
+      "category": 4,
+      "name": "NumPy",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 11,
+    "fields": {
+      "category": 4,
+      "name": "SQL",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 12,
+    "fields": {
+      "category": 5,
+      "name": "Probability",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 13,
+    "fields": {
+      "category": 5,
+      "name": "Hypothesis Testing",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 14,
+    "fields": {
+      "category": 6,
+      "name": "Text Processing",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 15,
+    "fields": {
+      "category": 6,
+      "name": "Sentiment Analysis",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 16,
+    "fields": {
+      "category": 7,
+      "name": "Cross-Validation",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 17,
+    "fields": {
+      "category": 7,
+      "name": "ROC Curves",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 18,
+    "fields": {
+      "category": 8,
+      "name": "Fairness",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 19,
+    "fields": {
+      "category": 8,
+      "name": "Accountability",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 20,
+    "fields": {
+      "category": 9,
+      "name": "Communication",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 21,
+    "fields": {
+      "category": 9,
+      "name": "Problem-Solving",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 22,
+    "fields": {
+      "category": 9,
+      "name": "Leadership",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 23,
+    "fields": {
+      "category": 10,
+      "name": "Python",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 24,
+    "fields": {
+      "category": 10,
+      "name": "C++",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 25,
+    "fields": {
+      "category": 10,
+      "name": "Java",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 26,
+    "fields": {
+      "category": 11,
+      "name": "TensorFlow",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 27,
+    "fields": {
+      "category": 11,
+      "name": "PyTorch",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 28,
+    "fields": {
+      "category": 12,
+      "name": "Feature Selection Techniques",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 29,
+    "fields": {
+      "category": 13,
+      "name": "Flask",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 30,
+    "fields": {
+      "category": 13,
+      "name": "Docker",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 31,
+    "fields": {
+      "category": 14,
+      "name": "Grid Search",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 32,
+    "fields": {
+      "category": 14,
+      "name": "Random Search",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 33,
+    "fields": {
+      "category": 15,
+      "name": "Accuracy",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 34,
+    "fields": {
+      "category": 15,
+      "name": "Precision",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 35,
+    "fields": {
+      "category": 15,
+      "name": "Recall",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 36,
+    "fields": {
+      "category": 16,
+      "name": "GitHub",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 37,
+    "fields": {
+      "category": 16,
+      "name": "JIRA",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 38,
+    "fields": {
+      "category": 17,
+      "name": "Communication",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 39,
+    "fields": {
+      "category": 17,
+      "name": "Problem-Solving",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 40,
+    "fields": {
+      "category": 18,
+      "name": "Python",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 41,
+    "fields": {
+      "category": 18,
+      "name": "R",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 42,
+    "fields": {
+      "category": 19,
+      "name": "Hypothesis Testing",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 43,
+    "fields": {
+      "category": 19,
+      "name": "A/B Testing",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 44,
+    "fields": {
+      "category": 20,
+      "name": "Pandas",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 45,
+    "fields": {
+      "category": 20,
+      "name": "SQL",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 46,
+    "fields": {
+      "category": 21,
+      "name": "Supervised Learning",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 47,
+    "fields": {
+      "category": 21,
+      "name": "Unsupervised Learning",
+      "importance": "High"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 48,
+    "fields": {
+      "category": 22,
+      "name": "Tableau",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 49,
+    "fields": {
+      "category": 22,
+      "name": "Power BI",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 50,
+    "fields": {
+      "category": 23,
+      "name": "Hadoop",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 51,
+    "fields": {
+      "category": 23,
+      "name": "Spark",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 52,
+    "fields": {
+      "category": 24,
+      "name": "Communication",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 53,
+    "fields": {
+      "category": 24,
+      "name": "Problem-Solving",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 54,
+    "fields": {
+      "category": 24,
+      "name": "Leadership",
+      "importance": "Medium"
+    }
+  },
+  {
+    "model": "api.subskill",
+    "pk": 55,
+    "fields": {
+      "category": 24,
+      "name": "Teamwork",
+      "importance": "Medium"
+    }
+  }
+]

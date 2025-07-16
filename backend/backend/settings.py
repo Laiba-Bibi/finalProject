@@ -40,9 +40,16 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'api',
+<<<<<<< Updated upstream
     'corsheaders',
 ]
 
+=======
+    'corsheaders', # <-- ADD THIS LINE
+]
+ 
+# ✅ Add this right here
+>>>>>>> Stashed changes
 AUTH_USER_MODEL = 'api.User'
 
 MIDDLEWARE = [
@@ -113,8 +120,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
+<<<<<<< Updated upstream
     "http://localhost:3000",  # This allows React to talk to Django
+=======
+    "http://localhost:3000",
+        "http://localhost:3001",
+          "http://127.0.0.1:3000",
+
+>>>>>>> Stashed changes
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 # REST Framework Settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -150,3 +166,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes

@@ -1,90 +1,89 @@
 import React, { useState } from 'react';
-     import { Link } from 'react-router-dom';
-     import Navbar from '../components/Navbar';
-     import Footer from '../components/Footer';
+import { Link, useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
-     const LoginPage = () => {
-       const [email, setEmail] = useState('');
-       const [password, setPassword] = useState('');
+const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-       const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await fetch('http://127.0.0.1:8000/api/token/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-body: JSON.stringify({ username: email, password }),
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/token/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: email, password }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      alert('Login successful!');
-      localStorage.setItem('access_token', data.access);
-      localStorage.setItem('refresh_token', data.refresh);
-      // You can redirect the user or update UI here
-    } else {
-      alert('Invalid credentials. Please try again.');
+      if (response.ok) {
+        localStorage.setItem('access_token', data.access);
+        localStorage.setItem('refresh_token', data.refresh);
+        navigate('/dashboard'); // ✅ Just go to dashboard quietly
+      } else {
+        alert('Invalid email or password. Please check your credentials.');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again later.');
     }
-  } catch (error) {
-    alert('Something went wrong. Please try again later.');
-  }
+  };
+
+  return (
+    <div className="bg-gray-100 min-h-screen flex flex-col">
+      <Navbar />
+      <main className="container mx-auto py-12 flex-grow">
+        <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-primary mb-6 text-center">Login</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-1 p-2 w-full border rounded-lg focus:ring-primary focus:border-primary"
+                required
+              />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="mt-1 p-2 w-full border rounded-lg focus:ring-primary focus:border-primary"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-800"
+            >
+              Login
+            </button>
+          </form>
+          <p className="mt-4 text-center">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-primary hover:underline">
+              Register
+            </Link>
+          </p>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
 };
 
-
-       return (
-         <div className="bg-gray-100 min-h-screen flex flex-col">
-           <Navbar />
-           <main className="container mx-auto py-12 flex-grow">
-             <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
-               <h2 className="text-2xl font-bold text-primary mb-6 text-center">Login</h2>
-               <form onSubmit={handleSubmit}>
-                 <div className="mb-4">
-                   <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                     Email
-                   </label>
-                   <input
-                     type="email"
-                     id="email"
-                     value={email}
-                     onChange={(e) => setEmail(e.target.value)}
-                     className="mt-1 p-2 w-full border rounded-lg focus:ring-primary focus:border-primary"
-                     required
-                   />
-                 </div>
-                 <div className="mb-6">
-                   <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                     Password
-                   </label>
-                   <input
-                     type="password"
-                     id="password"
-                     value={password}
-                     onChange={(e) => setPassword(e.target.value)}
-                     className="mt-1 p-2 w-full border rounded-lg focus:ring-primary focus:border-primary"
-                     required
-                   />
-                 </div>
-                 <button
-                   type="submit"
-                   className="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-800"
-                 >
-                   Login
-                 </button>
-               </form>
-               <p className="mt-4 text-center">
-                 Don't have an account?{' '}
-                 <Link to="/register" className="text-primary hover:underline">
-                   Register
-                 </Link>
-               </p>
-             </div>
-           </main>
-           <Footer />
-         </div>
-       );
-     };
-
-     export default LoginPage;
+export default LoginPage;
