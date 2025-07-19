@@ -121,6 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "http://localhost:3000",  # This allows React to talk to Django
 =======
     "http://localhost:3000",
@@ -130,12 +131,17 @@ CORS_ALLOWED_ORIGINS = [
 >>>>>>> Stashed changes
 ]
 
+=======
+    "http://localhost:3000",  # Adjust if your frontend runs on a different port
+    "http://127.0.0.1:3000",
+]
+>>>>>>> Stashed changes
 CORS_ALLOW_CREDENTIALS = True
 # REST Framework Settings
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
+    ),
 }
 # JWT Settings
 from datetime import timedelta
