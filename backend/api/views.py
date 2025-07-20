@@ -6,9 +6,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.views import APIView
+<<<<<<< Updated upstream
 from .models import SubSkill
 from .serializers import SubSkillSerializer
 from .models import SkillAssessmentResult
+=======
+
+>>>>>>> Stashed changes
 from .serializers import (
     EmailTokenObtainPairSerializer,
     UserInterestSerializer,
@@ -154,8 +158,11 @@ class AutoAssessFromSavedDataView(APIView):
             "missing_skills": unmatched_skills
         })
 # ✅ Add this at the end of your views.py
+<<<<<<< Updated upstream
 from .models import SkillAssessmentResult
 
+=======
+>>>>>>> Stashed changes
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_profile(request):
@@ -171,6 +178,7 @@ def get_profile(request):
     except UserInterest.DoesNotExist:
         interest = None
 
+<<<<<<< Updated upstream
     assessment_done = False
     assessment_level = None
 
@@ -180,12 +188,15 @@ def get_profile(request):
             assessment_done = True
             assessment_level = result.calculated_level
 
+=======
+>>>>>>> Stashed changes
     return Response({
         'username': user.username,
         'email': user.email,
         'education': profile.education,
         'experience': profile.experience,
         'goals': profile.goals,
+<<<<<<< Updated upstream
         'interest': interest,
         'assessment_done': assessment_done,
         'assessment_level': assessment_level
@@ -274,3 +285,8 @@ def assessment_status(request):
         })
     else:
         return Response({'already_done': False, 'interest': interest})
+=======
+        'interested_in_learning': profile.interested_in_learning,
+        'interest': interest
+    })
+>>>>>>> Stashed changes
