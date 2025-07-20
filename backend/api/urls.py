@@ -1,18 +1,18 @@
 # api/urls.py
 
 from django.urls import path
-<<<<<<< Updated upstream
-from .views import register, EmailTokenObtainPairView, save_interest, save_user_info, get_profile,  assessment_status # ✅ make sure this is imported!
-
+from .views import (
+    register,
+    EmailTokenObtainPairView,
+    save_interest,
+    save_user_info,
+    get_profile,
+    SkillMatrixAPIView,
+    assess_skill,
+    assessment_status,
+    AutoAssessFromSavedDataView,
+)
 from rest_framework_simplejwt.views import TokenRefreshView
-from .views import SkillMatrixAPIView, assess_skill
-=======
-from .views import register, EmailTokenObtainPairView, save_interest, save_user_info, get_profile
-from rest_framework_simplejwt.views import TokenRefreshView
-from .views import SkillMatrixAPIView
->>>>>>> Stashed changes
-from .views import AutoAssessFromSavedDataView  # Add this import at the top
-
 
 urlpatterns = [
     path('register/', register, name='register'),
@@ -23,16 +23,6 @@ urlpatterns = [
     path('skill-matrix/<str:field_name>/', SkillMatrixAPIView.as_view(), name='skill-matrix'),
     path('auto-assess/', AutoAssessFromSavedDataView.as_view(), name='auto_assess'),
     path('profile/', get_profile, name='profile'),
-<<<<<<< Updated upstream
-    path('profile/', get_profile),
-    path('skill-matrix/<str:field_name>/', SkillMatrixAPIView.as_view()),
-    path('assess-skill/', assess_skill),
-    path('assessment-status/', assessment_status),   # ✅ this line must exist!
-
+    path('assess-skill/', assess_skill, name='assess_skill'),
+    path('assessment-status/', assessment_status, name='assessment_status'),
 ]
-
-
-=======
-]
-
->>>>>>> Stashed changes

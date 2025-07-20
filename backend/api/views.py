@@ -6,20 +6,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.views import APIView
-<<<<<<< Updated upstream
-from .models import SubSkill
-from .serializers import SubSkillSerializer
-from .models import SkillAssessmentResult
-=======
 
->>>>>>> Stashed changes
+from .models import SubSkill, SkillAssessmentResult, UserInterest, UserProfile
 from .serializers import (
     EmailTokenObtainPairSerializer,
     UserInterestSerializer,
     UserProfileSerializer,
     SubSkillSerializer,
 )
-from .models import UserInterest, UserProfile, SubSkill, SkillAssessmentResult
 
 User = get_user_model()
 
@@ -157,12 +151,8 @@ class AutoAssessFromSavedDataView(APIView):
             "total_skills": total_skills,
             "missing_skills": unmatched_skills
         })
-# ✅ Add this at the end of your views.py
-<<<<<<< Updated upstream
-from .models import SkillAssessmentResult
 
-=======
->>>>>>> Stashed changes
+# ✅ Get Profile
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_profile(request):
@@ -178,7 +168,6 @@ def get_profile(request):
     except UserInterest.DoesNotExist:
         interest = None
 
-<<<<<<< Updated upstream
     assessment_done = False
     assessment_level = None
 
@@ -188,28 +177,25 @@ def get_profile(request):
             assessment_done = True
             assessment_level = result.calculated_level
 
-=======
->>>>>>> Stashed changes
     return Response({
         'username': user.username,
         'email': user.email,
         'education': profile.education,
         'experience': profile.experience,
         'goals': profile.goals,
-<<<<<<< Updated upstream
+        'interested_in_learning': profile.interested_in_learning,
         'interest': interest,
         'assessment_done': assessment_done,
         'assessment_level': assessment_level
     })
 
-
+# ✅ Assess Skill
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def assess_skill(request):
     user = request.user
     answers = request.data.get('answers')
 
-    # ✅ 1️⃣ CHECK if already done for this interest
     try:
         interest = user.interest.interest
     except:
@@ -225,7 +211,6 @@ def assess_skill(request):
             'already_done': True
         }, status=200)
 
-    # ✅ 2️⃣ If not done → calculate as before
     skills = SubSkill.objects.filter(category__field__name__iexact=interest)
 
     total = 0
@@ -266,7 +251,8 @@ def assess_skill(request):
         'score': final,
         'already_done': False
     }, status=200)
-# ✅ /api/assessment-status/
+
+# ✅ Assessment Status
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def assessment_status(request):
@@ -285,8 +271,3 @@ def assessment_status(request):
         })
     else:
         return Response({'already_done': False, 'interest': interest})
-=======
-        'interested_in_learning': profile.interested_in_learning,
-        'interest': interest
-    })
->>>>>>> Stashed changes
