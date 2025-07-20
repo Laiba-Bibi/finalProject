@@ -1,84 +1,165 @@
-import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
-     import Footer from '../components/Footer';
+import React, { useEffect, useState } from 'react';
 
-     const SkillAssessment = () => {
-       const [skills, setSkills] = useState({
-         coding: 0,
-         problemSolving: 0,
-         communication: 0,
-       });
+const SkillAssessment = () => {
+  const [profile, setProfile] = useState(null);
+  const [matrix, setMatrix] = useState([]);
+  const [answers, setAnswers] = useState({});
+  const [result, setResult] = useState(null);
+  const token = localStorage.getItem('access_token');
 
-       const handleSubmit = (e) => {
-         e.preventDefault();
-         // Placeholder for form submission
-         console.log('Skills:', skills);
-       };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // 1️⃣ Get profile
+        const res = await fetch('http://127.0.0.1:8000/api/profile/', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const profileData = await res.json();
+        console.log('✅ [Profile Loaded]', profileData); // 🔍 check interest
 
-       return (
-         <div className="bg-gray-100 min-h-screen flex flex-col">
-           <Navbar />
-           <main className="container mx-auto py-12 flex-grow">
-             <div className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
-               <h2 className="text-2xl font-bold text-primary mb-6 text-center">Skill Assessment</h2>
-               <form onSubmit={handleSubmit}>
-                 <div className="mb-4">
-                   <label htmlFor="coding" className="block text-sm font-medium text-gray-700">
-                     Coding (0-10)
-                   </label>
-                   <input
-                     type="number"
-                     id="coding"
-                     min="0"
-                     max="10"
-                     value={skills.coding}
-                     onChange={(e) => setSkills({ ...skills, coding: e.target.value })}
-                     className="mt-1 p-2 w-full border rounded-lg focus:ring-primary focus:border-primary"
-                     required
-                   />
-                 </div>
-                 <div className="mb-4">
-                   <label htmlFor="problemSolving" className="block text-sm font-medium text-gray-700">
-                     Problem Solving (0-10)
-                   </label>
-                   <input
-                     type="number"
-                     id="problemSolving"
-                     min="0"
-                     max="10"
-                     value={skills.problemSolving}
-                     onChange={(e) => setSkills({ ...skills, problemSolving: e.target.value })}
-                     className="mt-1 p-2 w-full border rounded-lg focus:ring-primary focus:border-primary"
-                     required
-                   />
-                 </div>
-                 <div className="mb-6">
-                   <label htmlFor="communication" className="block text-sm font-medium text-gray-700">
-                     Communication (0-10)
-                   </label>
-                   <input
-                     type="number"
-                     id="communication"
-                     min="0"
-                     max="10"
-                     value={skills.communication}
-                     onChange={(e) => setSkills({ ...skills, communication: e.target.value })}
-                     className="mt-1 p-2 w-full border rounded-lg focus:ring-primary focus:border-primary"
-                     required
-                   />
-                 </div>
-                 <button
-                   type="submit"
-                   className="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-800"
-                 >
-                   Submit Assessment
-                 </button>
-               </form>
-             </div>
-           </main>
-           <Footer />
-         </div>
-       );
-     };
+        setProfile(profileData);
 
-     export default SkillAssessment;
+        if (!profileData.interest) {
+          console.warn('⚠️ [NO INTEREST SET] This user does not have an interest yet.');
+          return; // stop here, no point fetching skill matrix
+        }
+
+        // 2️⃣ Check if already done
+        const statusRes = await fetch('http://127.0.0.1:8000/api/assessment-status/', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const statusData = await statusRes.json();
+        console.log('✅ [Assessment Status]', statusData);
+
+        if (statusData.already_done) {
+          setResult({
+            already_done: true,
+            level: statusData.level,
+            interest: statusData.interest,
+          });
+        } else {
+          console.log('✅ [Fetching Skill Matrix for]', profileData.interest);
+
+          const mRes = await fetch(
+            `http://127.0.0.1:8000/api/skill-matrix/${profileData.interest}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          const mData = await mRes.json();
+          console.log('✅ [Skill Matrix]', mData);
+
+          if (mData.length === 0) {
+            console.warn('⚠️ [Empty Skill Matrix] No subskills found for this interest.');
+          }
+
+          setMatrix(mData);
+        }
+      } catch (error) {
+        console.error('❌ [Fetch Error]', error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  const handleChange = (id, val) => {
+    setAnswers((prev) => ({ ...prev, [id]: parseInt(val) }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const res = await fetch('http://127.0.0.1:8000/api/assess-skill/', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ answers }),
+    });
+
+    const data = await res.json();
+    setResult(data);
+  };
+
+  if (!profile) return <p>Loading...</p>;
+
+  if (!profile.interest) {
+    return (
+      <div className="p-8 max-w-3xl mx-auto bg-white shadow rounded">
+        <h2 className="text-2xl font-bold mb-4">❌ No Interest Set</h2>
+        <p className="text-lg">You must select an interest before taking an assessment.</p>
+      </div>
+    );
+  }
+
+  if (result) {
+    return (
+      <div className="p-8 max-w-3xl mx-auto bg-white shadow rounded">
+        <h2 className="text-2xl font-bold mb-4">Assessment Result</h2>
+        {result.already_done ? (
+          <p className="text-lg">
+            ✅ You have already done your assessment for{' '}
+            <strong>{result.interest}</strong>. <br />
+            Your current skill level is <strong>{result.level}</strong>.
+          </p>
+        ) : (
+          <p className="text-lg">
+            🎉 Your new assessment for <strong>{profile.interest}</strong> is done! <br />
+            Your calculated skill level is <strong>{result.level}</strong>.
+          </p>
+        )}
+        <a
+          href="/dashboard"
+          className="inline-block mt-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-800"
+        >
+          Back to Dashboard
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-8 max-w-3xl mx-auto bg-white shadow rounded">
+      <h2 className="text-2xl font-bold mb-4">Skill Assessment for {profile.interest}</h2>
+
+      {matrix.length === 0 && (
+        <p className="mb-4 text-red-600">
+          ⚠️ No skills found for this interest. Please check your categories and subskills.
+        </p>
+      )}
+
+      <form onSubmit={handleSubmit}>
+        {matrix.map((skill) => (
+          <div key={skill.id} className="mb-4">
+            <label className="block font-medium">
+              {skill.category} - {skill.name} ({skill.importance})
+            </label>
+            <select
+              required
+              onChange={(e) => handleChange(skill.id, e.target.value)}
+              value={answers[skill.id] || ''}
+              className="w-full p-2 border rounded"
+            >
+              <option value="">Rate 1–5</option>
+              {[1, 2, 3, 4, 5].map((n) => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              ))}
+            </select>
+          </div>
+        ))}
+        <button
+          type="submit"
+          className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-800"
+        >
+          Submit Assessment
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default SkillAssessment;

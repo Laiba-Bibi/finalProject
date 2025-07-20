@@ -1,9 +1,10 @@
 # api/urls.py
 
 from django.urls import path
-from .views import register, EmailTokenObtainPairView, save_interest, save_user_info, get_profile
+from .views import register, EmailTokenObtainPairView, save_interest, save_user_info, get_profile,  assessment_status # ✅ make sure this is imported!
+
 from rest_framework_simplejwt.views import TokenRefreshView
-from .views import SkillMatrixAPIView
+from .views import SkillMatrixAPIView, assess_skill
 from .views import AutoAssessFromSavedDataView  # Add this import at the top
 
 
@@ -16,5 +17,11 @@ urlpatterns = [
     path('skill-matrix/<str:field_name>/', SkillMatrixAPIView.as_view(), name='skill-matrix'),
     path('auto-assess/', AutoAssessFromSavedDataView.as_view(), name='auto_assess'),
     path('profile/', get_profile, name='profile'),
+    path('profile/', get_profile),
+    path('skill-matrix/<str:field_name>/', SkillMatrixAPIView.as_view()),
+    path('assess-skill/', assess_skill),
+    path('assessment-status/', assessment_status),   # ✅ this line must exist!
+
 ]
+
 

@@ -6,7 +6,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.views import APIView
-
+from .models import SubSkill
+from .serializers import SubSkillSerializer
+from .models import SkillAssessmentResult
 from .serializers import (
     EmailTokenObtainPairSerializer,
     UserInterestSerializer,
@@ -85,6 +87,8 @@ def save_user_info(request):
 
 # ✅ Skill Matrix API
 class SkillMatrixAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, field_name):
         skills = SubSkill.objects.filter(category__field__name__iexact=field_name)
         serializer = SubSkillSerializer(skills, many=True)
@@ -150,6 +154,8 @@ class AutoAssessFromSavedDataView(APIView):
             "missing_skills": unmatched_skills
         })
 # ✅ Add this at the end of your views.py
+from .models import SkillAssessmentResult
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_profile(request):
@@ -165,12 +171,106 @@ def get_profile(request):
     except UserInterest.DoesNotExist:
         interest = None
 
+    assessment_done = False
+    assessment_level = None
+
+    if interest:
+        result = SkillAssessmentResult.objects.filter(user=user, interest=interest).first()
+        if result:
+            assessment_done = True
+            assessment_level = result.calculated_level
+
     return Response({
         'username': user.username,
         'email': user.email,
         'education': profile.education,
         'experience': profile.experience,
         'goals': profile.goals,
-        'interested_in_learning': profile.interested_in_learning,
-        'interest': interest
+        'interest': interest,
+        'assessment_done': assessment_done,
+        'assessment_level': assessment_level
     })
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def assess_skill(request):
+    user = request.user
+    answers = request.data.get('answers')
+
+    # ✅ 1️⃣ CHECK if already done for this interest
+    try:
+        interest = user.interest.interest
+    except:
+        return Response({'error': 'Interest not set.'}, status=400)
+
+    already_done = SkillAssessmentResult.objects.filter(user=user, interest=interest).exists()
+    if already_done:
+        existing = SkillAssessmentResult.objects.get(user=user, interest=interest)
+        return Response({
+            'message': f"You have already done your assessment for {interest}.",
+            'level': existing.calculated_level,
+            'score': None,
+            'already_done': True
+        }, status=200)
+
+    # ✅ 2️⃣ If not done → calculate as before
+    skills = SubSkill.objects.filter(category__field__name__iexact=interest)
+
+    total = 0
+    weight_sum = 0
+
+    for skill in skills:
+        score = answers.get(str(skill.id))
+        if score is not None:
+            weight = 1.0 if skill.importance == 'High' else 0.5
+            total += int(score) * weight
+            weight_sum += weight
+
+    if weight_sum == 0:
+        level = 'Unknown'
+        final = 0
+    else:
+        avg = total / weight_sum
+        if avg < 2.5:
+            level = 'Beginner'
+        elif avg < 3.5:
+            level = 'Intermediate'
+        else:
+            level = 'Advanced'
+        final = avg
+
+    SkillAssessmentResult.objects.create(
+        user=user,
+        interest=interest,
+        experience_text=user.profile.experience if hasattr(user, 'profile') else "",
+        calculated_level=level,
+        matched_skills=len(answers),
+        total_skills=skills.count()
+    )
+
+    return Response({
+        'message': f"Your assessment for {interest} is done.",
+        'level': level,
+        'score': final,
+        'already_done': False
+    }, status=200)
+# ✅ /api/assessment-status/
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def assessment_status(request):
+    user = request.user
+    try:
+        interest = user.interest.interest
+    except:
+        return Response({'error': 'Interest not set'}, status=400)
+
+    result = SkillAssessmentResult.objects.filter(user=user, interest=interest).first()
+    if result:
+        return Response({
+            'already_done': True,
+            'level': result.calculated_level,
+            'interest': interest
+        })
+    else:
+        return Response({'already_done': False, 'interest': interest})
