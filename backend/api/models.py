@@ -1,9 +1,8 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
+from experts.models import Expert
 
-# ✅ Custom User model
-class User(AbstractUser):
-    pass
+# Use Expert model as the user model
+User = Expert
 
 class UserInterest(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='interest')

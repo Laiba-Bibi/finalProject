@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'api',
     'corsheaders',
+    'experts'
 ]
 
-AUTH_USER_MODEL = 'api.User'
+AUTH_USER_MODEL = 'experts.Expert'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
