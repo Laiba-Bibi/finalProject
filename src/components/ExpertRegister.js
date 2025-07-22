@@ -14,6 +14,7 @@ const ExpertRegister = () => {
         availability: '',
         mentoringFormat: [],
         motivationStatement: '',
+        password: '',
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -31,19 +32,22 @@ const ExpertRegister = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        if (formData.password.length < 8) {
+            setError('Password must be at least 8 characters long.');
+            return;
+        }
         try {
             const response = await fetch('http://localhost:8000/api/experts/register/', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
             const result = await response.json();
             if (response.ok) {
+                localStorage.setItem('access_token', result.access_token); // Store JWT access token
+                localStorage.setItem('refresh_token', result.refresh_token); // Store JWT refresh token
                 setSuccess('Application submitted successfully!');
-                setTimeout(() => navigate('/experts/login'), 2000); // Redirect to login after 2 seconds
+                setTimeout(() => navigate('/experts/login'), 2000);
                 setFormData({
                     fullName: '',
                     email: '',
@@ -56,12 +60,13 @@ const ExpertRegister = () => {
                     availability: '',
                     mentoringFormat: [],
                     motivationStatement: '',
+                    password: '',
                 });
             } else {
-                setError('Error submitting application');
+                setError(result.error || 'Error submitting application');
             }
         } catch (err) {
-            setError('An error occurred');
+            setError('An error occurred: ' + (err.message || 'Unknown error'));
         }
     };
 
@@ -105,6 +110,18 @@ const ExpertRegister = () => {
                         />
                     </div>
                     <div className="mb-4">
+                        <label className="block text-gray-700">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className="w-full p-2 border rounded focus:border-secondary"
+                            placeholder="Minimum 8 characters"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
                         <label className="block text-gray-700">Job Title</label>
                         <input
                             type="text"
@@ -139,7 +156,6 @@ const ExpertRegister = () => {
                             <option value="Web Development">Web Development</option>
                             <option value="AI/ML">AI/ML</option>
                             <option value="Cybersecurity">Cybersecurity</option>
-                            <option value="Cloud Computing">Cloud Computing</option>
                         </select>
                     </div>
                     <div className="mb-4">
@@ -186,6 +202,7 @@ const ExpertRegister = () => {
                             className="w-full p-2 border rounded focus:border-secondary"
                         >
                             <option value="Written Feedback">Written Feedback</option>
+                            <option value="1:1 Video Calls">1:1 Video Calls</option>
                             <option value="Group Sessions">Group Sessions</option>
                         </select>
                     </div>
@@ -216,7 +233,7 @@ const ExpertRegister = () => {
                     type="submit"
                     className="w-full bg-primary text-white p-2 rounded hover:bg-opacity-90"
                 >
-                    Apply as an Expert
+                    Apply as Expert
                 </button>
             </form>
             <p className="mt-4 text-center">

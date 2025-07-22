@@ -24,7 +24,7 @@ def expert_register(request):
                 'error': 'An expert with this email already exists.'
             }, status=status.HTTP_400_BAD_REQUEST)
         
-        # Create new expert
+        # Create new expert with submitted password
         expert = Expert.objects.create(
             username=data.get('email'),  # Use email as username
             email=data.get('email'),
@@ -39,11 +39,11 @@ def expert_register(request):
             availability=data.get('availability', ''),
             mentoring_format=data.get('mentoringFormat', ''),
             motivation_statement=data.get('motivationStatement', ''),
-            password=make_password('temp_password_123')  # Set a temporary password
+            password=make_password(data.get('password', ''))  # Use submitted password, empty fallback
         )
         
         return Response({
-            'message': 'Expert registration successful! Please check your email for login credentials.',
+            'message': 'Expert registration successful! Please use your credentials to log in.',
             'expert_id': expert.id
         }, status=status.HTTP_201_CREATED)
         
@@ -62,7 +62,7 @@ def expert_login(request):
         password = data.get('password')
         
         # Authenticate user
-        expert = authenticate(username=email, password=password)
+        expert = authenticate(request, username=email, password=password)
         
         if expert is not None and isinstance(expert, Expert):
             # Generate JWT tokens

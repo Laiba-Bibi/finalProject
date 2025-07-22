@@ -17,13 +17,15 @@ const ExpertLogin = ({ setToken }) => {
             });
             const data = await response.json();
             if (response.ok) {
-                setToken(data.access);
+                localStorage.setItem('access_token', data.access_token);
+                localStorage.setItem('refresh_token', data.refresh_token);
+                setToken(data.access_token); // Update parent if needed
                 navigate('/experts/dashboard');
             } else {
                 setError(data.error || 'Login failed');
             }
         } catch (err) {
-            setError('An error occurred');
+            setError('An error occurred: ' + (err.message || 'Unknown error'));
         }
     };
 
