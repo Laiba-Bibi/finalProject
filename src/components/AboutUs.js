@@ -26,7 +26,7 @@ const AboutUs = () => {
           {/* Text Section */}
           <div className="w-full md:w-1/2 text-center md:text-left">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">About Us</h2>
-            <h3 className="text-2xl font-bold mb-6">Light, Fast & Powerful</h3>
+            <h3 className="text-2xl font-bold mb-6">Your Personalized Tech Career Guide</h3>
             <p className="text-[#22479b] mb-4">
               TechQuest Mentor is a dedicated platform that connects aspiring tech professionals
               with experienced industry experts who guide them through each career step.

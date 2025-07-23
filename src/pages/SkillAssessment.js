@@ -5,6 +5,7 @@ const SkillAssessment = () => {
   const [matrix, setMatrix] = useState([]);
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
+  const [loadingMatrix, setLoadingMatrix] = useState(true); // ✅ New flag
   const token = localStorage.getItem('access_token');
 
   useEffect(() => {
@@ -15,13 +16,13 @@ const SkillAssessment = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         const profileData = await res.json();
-        console.log('✅ [Profile Loaded]', profileData); // 🔍 check interest
+        console.log('✅ [Profile Loaded]', profileData);
 
         setProfile(profileData);
 
         if (!profileData.interest) {
           console.warn('⚠️ [NO INTEREST SET] This user does not have an interest yet.');
-          return; // stop here, no point fetching skill matrix
+          return;
         }
 
         // 2️⃣ Check if already done
@@ -37,6 +38,7 @@ const SkillAssessment = () => {
             level: statusData.level,
             interest: statusData.interest,
           });
+          setLoadingMatrix(false); // ✅ Done
         } else {
           console.log('✅ [Fetching Skill Matrix for]', profileData.interest);
 
@@ -49,14 +51,22 @@ const SkillAssessment = () => {
           const mData = await mRes.json();
           console.log('✅ [Skill Matrix]', mData);
 
-          if (mData.length === 0) {
-            console.warn('⚠️ [Empty Skill Matrix] No subskills found for this interest.');
+          // ✅ Deduplicate by name
+          const unique = [];
+          const seen = new Set();
+          for (const item of mData) {
+            if (!seen.has(item.name)) {
+              seen.add(item.name);
+              unique.push(item);
+            }
           }
 
-          setMatrix(mData);
+          setMatrix(unique);
+          setLoadingMatrix(false); // ✅ Done
         }
       } catch (error) {
         console.error('❌ [Fetch Error]', error);
+        setLoadingMatrix(false); // ✅ Stop loading on error too
       }
     };
 
@@ -124,7 +134,8 @@ const SkillAssessment = () => {
     <div className="p-8 max-w-3xl mx-auto bg-white shadow rounded">
       <h2 className="text-2xl font-bold mb-4">Skill Assessment for {profile.interest}</h2>
 
-      {matrix.length === 0 && (
+      {/* ✅ Warning only if matrix is empty AND done loading */}
+      {matrix.length === 0 && !loadingMatrix && (
         <p className="mb-4 text-red-600">
           ⚠️ No skills found for this interest. Please check your categories and subskills.
         </p>

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
+
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -48,28 +50,49 @@ const ContactForm = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-    setIsSubmitting(true);
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-    }, 1500);
-  };
+  e.preventDefault();
+  const validationErrors = validate();
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  emailjs
+    .send(
+      'service_gy74dkb', // 👈 replace with your real Service ID
+      'template_yh5sd94', // 👈 replace with your real Template ID
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      },
+      'F9JFYd-B65l9NGElj' // 👈 replace with your real Public Key
+    )
+    .then(
+      (response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      },
+      (err) => {
+        console.log('FAILED...', err);
+        setIsSubmitting(false);
+        alert('Oops! Something went wrong. Please try again.');
+      }
+    );
+};
 
   return (
     <section className="py-16 bg-gray-50" id="contact">
