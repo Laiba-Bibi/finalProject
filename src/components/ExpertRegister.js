@@ -155,7 +155,7 @@ const ExpertRegister = () => {
                         >
                             <option value="Web Development">Web Development</option>
                             <option value="AI/ML">AI/ML</option>
-                            <option value="Cybersecurity">Cybersecurity</option>
+                            <option value="Data Science">Data Science</option>
                         </select>
                     </div>
                     <div className="mb-4">
@@ -202,7 +202,6 @@ const ExpertRegister = () => {
                             className="w-full p-2 border rounded focus:border-secondary"
                         >
                             <option value="Written Feedback">Written Feedback</option>
-                            <option value="1:1 Video Calls">1:1 Video Calls</option>
                             <option value="Group Sessions">Group Sessions</option>
                         </select>
                     </div>

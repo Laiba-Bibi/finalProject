@@ -13,7 +13,7 @@ const GoalSelection = ({ formData, setFormData }) => {
   // });
   const [currentStep, setCurrentStep] = React.useState(2); // Keep if needed for local step tracking
 
-  const interests = ['Web Development', 'Artificial Intelligence', 'Data Science', 'Machine Learning'];
+  const interests = ['Web Development', 'Artificial Intelligence', 'Data Science'];
 
   const handleNext = async () => {
     if (!formData.interest) return;

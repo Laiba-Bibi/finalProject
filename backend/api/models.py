@@ -1,8 +1,8 @@
 from django.db import models
-from experts.models import Expert
+from django.contrib.auth import get_user_model
 
-# Use Expert model as the user model
-User = Expert
+# Dynamically get the user model (Expert)
+User = get_user_model()
 
 class UserInterest(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='interest')
