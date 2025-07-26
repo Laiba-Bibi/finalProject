@@ -53,12 +53,12 @@ const Dashboard = () => {
             <img src={logo} alt="TechQuestMentor Logo" className="h-14 object-contain" />
           </div>
 
-          <nav className="flex flex-col p-6 space-y-4">
-            {['dashboard', 'profile', 'update', 'expert'].map((tab) => (
+          <nav className="flex flex-col p-6 space-y-2">
+            {['dashboard', 'profile', 'expert'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`w-full py-2 rounded text-left px-4 font-medium ${
+                className={`w-full py-3 px-4 rounded text-left font-medium ${
                   activeTab === tab
                     ? 'bg-[#0c5ec9] text-white'
                     : 'text-[#0c5ec9] hover:bg-black hover:text-white'
@@ -66,7 +66,6 @@ const Dashboard = () => {
               >
                 {tab === 'dashboard' && 'Dashboard'}
                 {tab === 'profile' && 'Profile Info'}
-                {tab === 'update' && 'Update Profile'}
                 {tab === 'expert' && 'Expert View'}
               </button>
             ))}
@@ -96,8 +95,8 @@ const Dashboard = () => {
 
         <main className="flex-grow p-8 overflow-y-auto">
           {activeTab === 'dashboard' && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white p-6 rounded shadow flex flex-col justify-between">
+            <div className="flex flex-wrap gap-6">
+              <div className="bg-white p-6 rounded shadow flex flex-col justify-between min-h-[300px] w-full md:w-[48%]">
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Skill Assessment</h3>
                   {profile.assessment_done ? (
@@ -125,20 +124,7 @@ const Dashboard = () => {
                 )}
               </div>
 
-              <div className="bg-white p-6 rounded shadow flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Career Goals</h3>
-                  <p className="text-gray-600 mb-4">Set or update your career objectives.</p>
-                </div>
-                <Link
-                  to="/goals"
-                  className="inline-block px-4 py-2 bg-[#0c5ec9] text-white rounded hover:bg-black"
-                >
-                  Go to Goals
-                </Link>
-              </div>
-
-              <div className="bg-white p-6 rounded shadow flex flex-col justify-between">
+              <div className="bg-white p-6 rounded shadow flex flex-col justify-between min-h-[300px] w-full md:w-[48%]">
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Roadmap</h3>
                   <p className="text-gray-600 mb-4">View your personalized career path.</p>

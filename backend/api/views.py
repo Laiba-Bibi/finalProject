@@ -14,6 +14,7 @@ from .serializers import (
     UserProfileSerializer,
     SubSkillSerializer,
 )
+from .ai_utils import generate_roadmap  # ✅ Import AI roadmap utility
 
 User = get_user_model()
 
@@ -271,3 +272,29 @@ def assessment_status(request):
         })
     else:
         return Response({'already_done': False, 'interest': interest})
+
+# ✅ AI Roadmap View
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def generate_roadmap_view(request):
+    user = request.user
+
+    try:
+        profile = user.profile
+        interest = user.interest.interest
+    except (UserProfile.DoesNotExist, UserInterest.DoesNotExist):
+        return Response({'error': 'Incomplete profile or interest.'}, status=400)
+
+    result = SkillAssessmentResult.objects.filter(user=user, interest=interest).first()
+    if not result:
+        return Response({'error': 'Assessment not done yet.'}, status=400)
+
+    from .ai_utils import generate_roadmap  # ✅ Safely import here to avoid circular issues
+
+    roadmap = generate_roadmap(
+        interest=interest,
+        education=profile.education,
+        level=result.calculated_level
+    )
+
+    return Response({'roadmap': roadmap})

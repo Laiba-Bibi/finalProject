@@ -1,5 +1,3 @@
-# api/urls.py
-
 from django.urls import path
 from .views import (
     register,
@@ -11,6 +9,7 @@ from .views import (
     assess_skill,
     assessment_status,
     AutoAssessFromSavedDataView,
+    generate_roadmap_view,   # ✅ ADD THIS
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -25,4 +24,5 @@ urlpatterns = [
     path('profile/', get_profile, name='profile'),
     path('assess-skill/', assess_skill, name='assess_skill'),
     path('assessment-status/', assessment_status, name='assessment_status'),
+    path('generate-roadmap/', generate_roadmap_view, name='generate_roadmap'),  # ✅ THIS LINe
 ]
