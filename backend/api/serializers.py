@@ -58,3 +58,7 @@ class SubSkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubSkill
         fields = ['id', 'name', 'importance', 'category', 'field']
+class SoftwareHouseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SoftwareHouse
+        fields = ['id', 'name', 'website', 'linkedin_url', 'focus_areas']
