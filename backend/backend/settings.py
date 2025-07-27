@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-#AUTH_USER_MODEL = 'api.User'
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+from datetime import timedelta
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent  # ✅ Correct usage
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -25,38 +25,36 @@ SECRET_KEY = 'django-insecure-1(r4%crvj81#egn5x=fq(4slsq72z0ei!pdbiqvc9u4gg@p=k9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'rest_framework',
-    'rest_framework_simplejwt',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
     'api',
+    'corsheaders',
+    'experts'
 ]
 
-# ✅ Add this right here
-AUTH_USER_MODEL = 'api.User'
-
+AUTH_USER_MODEL = 'experts.Expert'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-         'django.middleware.security.SecurityMiddleware',
-         'django.contrib.sessions.middleware.SessionMiddleware',
-         'django.middleware.common.CommonMiddleware',
-         'django.middleware.csrf.CsrfViewMiddleware',
-         'django.contrib.auth.middleware.AuthenticationMiddleware',
-         'django.contrib.messages.middleware.MessageMiddleware',
-         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     ]
-
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -78,20 +76,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#MongoDB Configuration
-# Default SQLite Configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sample',
         'USER': 'root',
         'PASSWORD': 'Laibabibi@123',
-        'HOST': '127.0.0.1',  # or the hostname where your MySQL server is running
-        'PORT': '3306',      # or the port on which your MySQL server is listening
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -112,19 +107,25 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 # CORS Settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React frontend URL
-]
+CORS_ALLOW_ALL_ORIGINS = True # Temporarily allow all for debugging
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://localhost:3001",
+#     "http://127.0.0.1:3000",
+# ]
+
+CORS_ALLOW_CREDENTIALS = True
+
 # REST Framework Settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
-# JWT Settings
-from datetime import timedelta
 
+# JWT Settings
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
@@ -141,7 +142,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -151,6 +151,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # This allows React to talk to Django
-]

@@ -1,17 +1,19 @@
 // src/pages/GoalSelection.js
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
-const GoalSelection = () => {
+// Accept formData and setFormData as props
+const GoalSelection = ({ formData, setFormData }) => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState(() => {
-    const saved = localStorage.getItem('formData');
-    return saved ? JSON.parse(saved) : {};
-  });
-  const [currentStep, setCurrentStep] = useState(2);
+  // Remove local formData state and localStorage initialization
+  // const [formData, setFormData] = useState(() => {
+  //   const saved = localStorage.getItem('formData');
+  //   return saved ? JSON.parse(saved) : {};
+  // });
+  const [currentStep, setCurrentStep] = React.useState(2); // Keep if needed for local step tracking
 
-  const interests = ['Web Development', 'Artificial Intelligence', 'Data Science', 'Machine Learning'];
+  const interests = ['Web Development', 'Artificial Intelligence', 'Data Science'];
 
   const handleNext = async () => {
     if (!formData.interest) return;
@@ -24,49 +26,42 @@ const GoalSelection = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
+        // Use formData.interest from the centralized state
         body: JSON.stringify({ interest: formData.interest }),
       });
     } catch (error) {
       console.error('Network error, continuing anyway...');
     }
 
-    // Save updated formData
-    localStorage.setItem('formData', JSON.stringify(formData));
+    // Remove saving updated formData to localStorage here
+    // localStorage.setItem('formData', JSON.stringify(formData));
 
     setCurrentStep(currentStep + 1);
     navigate('/UserInformation');
   };
 
   const handleInterestSelect = (interest) => {
-    const updated = { ...formData, interest };
-    setFormData(updated);
-    localStorage.setItem('formData', JSON.stringify(updated));
+    // Update the centralized formData via setFormData prop
+    setFormData((prev) => ({
+      ...prev,
+      interest: interest, // Update the 'interest' field in formData
+    }));
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-md w-full max-w-md p-6">
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
-            <img src={logo} alt="Logo" className="h-10" />
-            <span className="text-sm font-medium text-gray-500">Step-{currentStep}</span>
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${(currentStep / 3) * 100}%` }} />
-          </div>
-        </div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <img src={logo} alt="Logo" className="mb-6 w-24" />
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-bold text-center mb-6">Select Your Goal</h2>
 
-        <h2 className="text-lg font-medium text-gray-800 mb-2">Choose your interest</h2>
-        <p className="text-gray-600 mb-4">Please choose a tech field from the given options</p>
-
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 gap-4">
           {interests.map((interest) => (
             <div
               key={interest}
+              className={`p-4 border rounded-md cursor-pointer flex items-center justify-between
+                ${formData.interest === interest ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}
+                hover:shadow-lg transition duration-200 ease-in-out`}
               onClick={() => handleInterestSelect(interest)}
-              className={`p-4 border rounded-lg cursor-pointer transition-colors ${
-                formData.interest === interest ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:bg-gray-50'
-              }`}
             >
               <div className="flex items-center">
                 <div

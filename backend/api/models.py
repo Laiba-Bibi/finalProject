@@ -1,10 +1,8 @@
-# api/models.py
-
-from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth import get_user_model
 
-class User(AbstractUser):
-    pass
+# Dynamically get the user model (Expert)
+User = get_user_model()
 
 class UserInterest(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='interest')
@@ -22,6 +20,7 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} Profile"
+
 class TechField(models.Model):
     name = models.CharField(max_length=100)
 
@@ -49,3 +48,12 @@ class SubSkill(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.importance})"
+
+class SkillAssessmentResult(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    interest = models.CharField(max_length=100)  # e.g. Web Development
+    experience_text = models.TextField()         # what user typed
+    calculated_level = models.CharField(max_length=50)  # Beginner, Intermediate, Advanced
+    matched_skills = models.IntegerField()
+    total_skills = models.IntegerField()
+    assessment_date = models.DateTimeField(auto_now_add=True)

@@ -1,67 +1,85 @@
 import React from 'react';
-import logo from '../assets/logo.png';  // adjust path accordingly
+import logo from '../assets/logo.png';
+import { useNavigate } from 'react-router-dom';
 
-import { useNavigate } from 'react-router-dom'; // 👈 Step 1
-
-const UserInformation = ({ formData, setFormData, next }) => {
-  const navigate = useNavigate(); // 👈 Step 2
+const UserInformation = ({ formData, setFormData }) => {
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/save-user-info/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-        },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/save-user-info/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+      },
+      body: JSON.stringify({
+        education: formData.education,
+        experience: formData.experience,
+        goals: formData.goals,
+        interested_in_learning: formData.interestedInLearning
+      }),
+    });
 
-      if (!response.ok) {
-        throw new Error('Failed to submit form data');
-      }
-
-      next();
-
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('There was a problem submitting your data. Please try again.');
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to save user information');
     }
-  };
+
+    navigate('/dashboard');
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert(error.message || 'There was a problem submitting your data. Please try again.');
+  }
+};
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <div className="text-center mb-6">
-<img src={logo} alt="TechQuest Mentor Logo" className="h-12" />
+        <img src={logo} alt="TechQuest Mentor Logo" className="h-12" />
       </div>
 
       <div className="flex border-b mb-6">
-  <button className="px-4 py-2 font-medium text-gray-500" type="button" onClick={() => navigate('/register')}>
-    General
-  </button>
-  <button className="px-4 py-2 font-medium text-gray-500" type="button" onClick={() => navigate('/goalselection')}>
-    Interests
-  </button>
-  <button className="px-4 py-2 font-medium text-blue-600 border-b-2 border-blue-600" type="button">
-    User Information
-  </button>
-</div>
-
+        <button
+          className="px-4 py-2 font-medium text-gray-500"
+          type="button"
+          onClick={() => navigate('/register')}
+        >
+          General
+        </button>
+        <button
+          className="px-4 py-2 font-medium text-gray-500"
+          type="button"
+          onClick={() => navigate('/goalselection')}
+        >
+          Interests
+        </button>
+        <button
+          className="px-4 py-2 font-medium text-blue-600 border-b-2 border-blue-600"
+          type="button"
+        >
+          User Information
+        </button>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <div className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Tell us something about yourself</h2>
-          <p className="text-gray-500 text-sm mb-6">This information helps for better suggestions for your career</p>
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">
+            Tell us something about yourself
+          </h2>
+          <p className="text-gray-500 text-sm mb-6">
+            This information helps for better suggestions for your career
+          </p>
 
           <div className="mb-6">
             <label className="block text-gray-700 mb-2" htmlFor="education">
@@ -76,7 +94,7 @@ const UserInformation = ({ formData, setFormData, next }) => {
               required
             >
               <option value="" disabled>Select your education</option>
-              <option value="Matrix">Matrix</option>
+              <option value="Matrix">Matric</option>
               <option value="Intermediate">Intermediate</option>
               <option value="Bachelor's">Bachelor's</option>
               <option value="Master's">Master's</option>
@@ -125,9 +143,13 @@ const UserInformation = ({ formData, setFormData, next }) => {
                 <input
                   type="radio"
                   name="interestedInLearning"
-                  value="Yes"
-                  checked={formData.interestedInLearning === 'Yes'}
-                  onChange={handleChange}
+                  checked={formData.interestedInLearning === true}
+                  onChange={() =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      interestedInLearning: true,
+                    }))
+                  }
                   className="text-blue-600 focus:ring-blue-500"
                   required
                 />
@@ -137,9 +159,13 @@ const UserInformation = ({ formData, setFormData, next }) => {
                 <input
                   type="radio"
                   name="interestedInLearning"
-                  value="No"
-                  checked={formData.interestedInLearning === 'No'}
-                  onChange={handleChange}
+                  checked={formData.interestedInLearning === false}
+                  onChange={() =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      interestedInLearning: false,
+                    }))
+                  }
                   className="text-blue-600 focus:ring-blue-500"
                 />
                 <span className="ml-2">No</span>
@@ -152,7 +178,7 @@ const UserInformation = ({ formData, setFormData, next }) => {
           <button
             type="button"
             className="px-6 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50"
-            onClick={() => navigate('/goalselection')} // 👈 Step 3
+            onClick={() => navigate('/goalselection')}
           >
             Back
           </button>

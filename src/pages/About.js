@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
-import banner from '../assets/Banner.png'; // Ensure the image path is correct
+import banner from '../assets/Banner.png';
 import member1 from '../assets/member1.jpeg';
 import member2 from '../assets/member2.png';
 
@@ -91,14 +91,14 @@ const About = () => {
           </p>
           <div className="flex justify-center space-x-4">
             <Link
-              to="/expert-login"
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
+              to="/experts/login" // Updated from /expert-login
+              className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300"
             >
               Expert Login
             </Link>
             <Link
-              to="/expert-signup"
-              className="bg-transparent border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition duration-300"
+              to="/experts/register" // Updated from /expert-signup
+              className="bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300"
             >
               Join as an Expert
             </Link>

@@ -6,12 +6,16 @@ import UserInformation from '../pages/UserInformation';
 import GoalSelection from '../pages/GoalSelection';
 
 const MultiStepWrapper = () => {
+  // This is the centralized formData state
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     interest: '',
-    // add more as needed
+    education: '', // Added for UserInformation
+    experience: '', // Added for UserInformation
+    goals: '', // Added for UserInformation
+    interestedInLearning: true, // Added for UserInformation, ensure consistent initial value
   });
 
   return (
