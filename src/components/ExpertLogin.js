@@ -15,14 +15,14 @@ const ExpertLogin = ({ setToken }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
             });
-            const data = await response.json();
+            const result = await response.json();
             if (response.ok) {
-                localStorage.setItem('access_token', data.access_token);
-                localStorage.setItem('refresh_token', data.refresh_token);
-                setToken(data.access_token); // Update parent if needed
+                localStorage.setItem('expertToken', result.access_token);
+                localStorage.setItem('expertRefreshToken', result.refresh_token);
+                setToken(result.access_token); // Update parent if needed
                 navigate('/experts/dashboard');
             } else {
-                setError(data.error || 'Login failed');
+                setError(result.error || 'Login failed');
             }
         } catch (err) {
             setError('An error occurred: ' + (err.message || 'Unknown error'));

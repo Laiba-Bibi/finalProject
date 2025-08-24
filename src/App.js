@@ -15,7 +15,8 @@ import UserInformation from './pages/UserInformation';
 import ExpertLogin from './components/ExpertLogin'; // New import for expert login
 import ExpertDashboard from './components/ExpertDashboard'; // New import for expert dashboard
 import ExpertRegister from './components/ExpertRegister'; // New import for expert register
-
+import Recommendation from './pages/Recommendation';
+import Resources from './pages/Resources';
 function App() {
   // Centralized form data state
   const [formData, setFormData] = useState({
@@ -43,6 +44,8 @@ function App() {
         <Route path="/gamification" element={<Gamification />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/recommendation" element={<Recommendation />} />
+        <Route path="/resources" element={<Resources />} />
         <Route
           path="/userInformation"
           element={
@@ -72,4 +75,4 @@ function App() {
   );
 }
 
-export default App;                               
+export default App;

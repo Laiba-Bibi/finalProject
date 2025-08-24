@@ -2,25 +2,31 @@ import subprocess
 
 def generate_roadmap(interest, education, level):
     prompt = f"""
-The student is exploring the field of {interest}.
+You are an AI assistant helping students learn specific tech fields.
 
-The user has the following background:
+💡 Focus strictly on the following:
+- Interest: **{interest}**
 - Education Level: {education}
-- Current Skill Level: {level}
+- Skill Level: {level}
 
-Based on this, generate a personalized career roadmap for the selected field.
+🧠 Generate a structured, concise learning roadmap ONLY for the selected field: **{interest}**
 
-🔹 Provide bullet-point steps grouped under these sections:
+Do NOT include:
+- Any information about other fields (e.g. if interest is AI, don't mention Web Development or Data Science).
+- Platform names (like Udemy, Coursera).
+- Community or networking advice.
+- Job hunting tips.
 
+✅ Format:
 1. 🚀 Core Skills to Strengthen
 2. 🧠 Frameworks & Libraries to Learn
 3. 🛠️ Important Tools to Master
-4. 📚 Suggested Learning Topics or Courses (no platform names, just course topics)
-5. 📈 Next Steps (e.g., start project, contribute, practice X)
+4. 📚 Suggested Learning Topics (just course TOPICS, not platforms)
+5. 📈 Next Steps (project ideas, hands-on practice only)
 
-🚫 Do not include anything about joining communities, platforms, making accounts, or general advice.
-✅ The output should change meaningfully based on interest (e.g., Web Dev vs AI vs Data Science).
-✅ Keep the output concise, structured, and in plain Markdown bullet list format.
+✅ Output must be short, structured, and in Markdown bullet format.
+
+Now, generate the roadmap ONLY for the selected field: **{interest}**
 """
 
     try:

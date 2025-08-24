@@ -44,8 +44,8 @@ const ExpertRegister = () => {
             });
             const result = await response.json();
             if (response.ok) {
-                localStorage.setItem('access_token', result.access_token); // Store JWT access token
-                localStorage.setItem('refresh_token', result.refresh_token); // Store JWT refresh token
+                localStorage.setItem('expertToken', result.access_token);
+                localStorage.setItem('expertRefreshToken', result.refresh_token);
                 setSuccess('Application submitted successfully!');
                 setTimeout(() => navigate('/experts/login'), 2000);
                 setFormData({
